@@ -1,11 +1,12 @@
 {
   "name": "react-file-explorer",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "A simple file explorer in React using Html5 Storage API",
   "main": "index.js",
   "scripts": {
     "test": "mocha --compilers js:babel-core/register",
     "build": "webpack -w",
+    "lint": "eslint src/ test/",
     "start": "webpack-dev-server --content-base ./public"
   },
 

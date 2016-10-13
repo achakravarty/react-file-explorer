@@ -36,7 +36,7 @@ export default function fileSystem(state = {}, action) {
 		return {
 			...state,
 			file
-		}
+		};
 	}
 	default: return state;
 	}
