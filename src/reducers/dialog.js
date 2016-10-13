@@ -1,6 +1,6 @@
 import { constants } from '../actions/dialog';
 
-export default function dialog(state = { openUploader: false }, action) {
+export default function dialog(state = { openPreview: false, openUploader: false }, action) {
 	switch (action.type) {
 	case constants.OPEN_UPLOADER: {
 		return {
@@ -8,9 +8,17 @@ export default function dialog(state = { openUploader: false }, action) {
 			openUploader: true
 		};
 	}
+	case constants.OPEN_PREVIEW: {
+		return {
+			...state,
+			openPreview: true,
+			id: action.id
+		};
+	}
 	case constants.CLOSE_DIALOG: {
 		return {
 			...state,
+			openPreview: false,
 			openUploader: false
 		};
 	}

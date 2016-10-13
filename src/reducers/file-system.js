@@ -29,10 +29,14 @@ export default function fileSystem(state = {}, action) {
 		};
 	}
 	case constants.ITEM_EDITING: {
+		return { ...state, contents: action.contents };
+	}
+	case constants.FILE_OPENED: {
+		const { file } = action;
 		return {
 			...state,
-			contents: action.contents
-		};
+			file
+		}
 	}
 	default: return state;
 	}

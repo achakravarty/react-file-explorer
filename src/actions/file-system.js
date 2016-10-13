@@ -7,6 +7,7 @@ const ITEM_COPIED = 'ITEM_COPIED';
 const ITEM_CUT = 'ITEM_CUT';
 const ITEM_PASTED = 'ITEM_PASTED';
 const ITEM_EDITING = 'ITEM_EDITING';
+const FILE_OPENED = 'FILE_OPENED';
 
 const contentsFetched = (contents, path) => ({
 	type: CONTENTS_FETCHED,
@@ -44,6 +45,11 @@ const itemPasted = (structure, contents) => ({
 const startedEditing = contents => ({
 	type: ITEM_EDITING,
 	contents
+});
+
+const fileOpened = file => ({
+	type: FILE_OPENED,
+	file
 });
 
 const getDetails = (id) => {
@@ -146,6 +152,11 @@ const uploadFiles = (files, currentFolderId) => {
 	};
 };
 
+const openFile = (id) => {
+	const file = FileSystemManager.openFile(id);
+	return fileOpened(file);
+};
+
 export const constants = {
 	CONTENTS_FETCHED,
 	FOLDER_CHANGED,
@@ -153,7 +164,8 @@ export const constants = {
 	ITEM_COPIED,
 	ITEM_CUT,
 	ITEM_PASTED,
-	ITEM_EDITING
+	ITEM_EDITING,
+	FILE_OPENED
 };
 
 export const actions = {
@@ -166,5 +178,6 @@ export const actions = {
 	paste,
 	startEditing,
 	doneEditing,
-	uploadFiles
+	uploadFiles,
+	openFile
 };

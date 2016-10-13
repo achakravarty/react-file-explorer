@@ -10,6 +10,7 @@ const ContentView = ({ contents, currentFolder, toggleContextMenu, closeMenu }) 
 			id={ item.id }
 			type={ item.type }
 			name={ item.name }
+			preview={ item.preview }
 			currentFolder={ currentFolder }
 			isEditing={ item.isEditing }
 		/>

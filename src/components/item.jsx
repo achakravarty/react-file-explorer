@@ -26,22 +26,25 @@ const handleDoubleClick = (id, isEditing, type, handler) => {
 	}
 };
 
-const getItemIcon = (name, type) => {
+const getItemIcon = (preview, name, type) => {
+	if (preview) {
+		return <img src={ preview } alt={ name } style={ { height: '50%' } } />;
+	}
 	return <img src={ `/assets/images/${typeToIconMap[type]}` } alt={ name } style={ { height: '50%' } } />;
 };
 
 const Item = (
-	{ id, type, name, changeFolder, isEditing, doneEditing, openContextMenu }
+	{ id, type, name, preview, changeFolder, isEditing, doneEditing, openContextMenu }
 ) => (
 	<GridTile
 		key={ `/assets/images/${typeToIconMap[type]}` }
-		onDoubleClick={ () => { handleDoubleClick(id, type, changeFolder); } }
+		onDoubleClick={ () => { handleDoubleClick(id, isEditing, type, changeFolder); } }
 		onContextMenu={ (e) => { openContextMenu(e, id); } }
 		onKeyUp={ (e) => { handleKeyUp(e, isEditing, doneEditing); } }
 		className='item'>
 		<div style={ { textAlign: 'center', cursor: 'pointer' } }>
 			<div style={ { margin: 10 } }>
-				{ getItemIcon(name, type) }
+				{ getItemIcon(preview, name, type) }
 			</div>
 			<div>
 				{ isEditing ? getTextField(name) : name }
@@ -54,6 +57,7 @@ Item.propTypes = {
 	id: React.PropTypes.string.isRequired,
 	type: React.PropTypes.string.isRequired,
 	name: React.PropTypes.string.isRequired,
+	preview: React.PropTypes.string,
 	isEditing: React.PropTypes.bool,
 	doneEditing: React.PropTypes.func.isRequired,
 	changeFolder: React.PropTypes.func.isRequired,
