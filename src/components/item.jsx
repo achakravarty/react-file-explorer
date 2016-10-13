@@ -30,14 +30,14 @@ const getItemIcon = (preview, name, type) => {
 	if (preview) {
 		return <img src={ preview } alt={ name } style={ { height: '50%' } } />;
 	}
-	return <img src={ `/assets/images/${typeToIconMap[type]}` } alt={ name } style={ { height: '50%' } } />;
+	return <img src={ `./assets/images/${typeToIconMap[type]}` } alt={ name } style={ { height: '50%' } } />;
 };
 
 const Item = (
 	{ id, type, name, preview, changeFolder, isEditing, doneEditing, openContextMenu }
 ) => (
 	<GridTile
-		key={ `/assets/images/${typeToIconMap[type]}` }
+		key={ `./assets/images/${typeToIconMap[type]}` }
 		onDoubleClick={ () => { handleDoubleClick(id, isEditing, type, changeFolder); } }
 		onContextMenu={ (e) => { openContextMenu(e, id); } }
 		onKeyUp={ (e) => { handleKeyUp(e, isEditing, doneEditing); } }

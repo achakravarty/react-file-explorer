@@ -9,7 +9,7 @@ const typeToIconMap = {
 	image: 'image.png'
 };
 
-const getIcon = type => <Avatar src={ `/assets/images/${typeToIconMap[type]}` } style={ IconStyle } />;
+const getIcon = type => <Avatar src={ `./assets/images/${typeToIconMap[type]}` } style={ IconStyle } />;
 
 const SidebarItem = ({ id, name, type, nestedItems, nestedLevel, open, changeFolder }) =>
 	<ListItem
