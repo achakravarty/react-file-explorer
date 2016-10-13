@@ -9,6 +9,14 @@ export default function fileSystem(state = {}, action) {
 			contents
 		};
 	}
+	case constants.FOLDER_CHANGED: {
+		const { contents, folderId } = action;
+		return {
+			...state,
+			currentFolder: folderId,
+			contents
+		};
+	}
 	default: return state;
 	}
 }

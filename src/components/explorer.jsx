@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
+
+import Sidebar from '../containers/sidebar';
 import ContentView from '../containers/content-view';
 
 class FileExplorer extends Component {
@@ -23,6 +25,7 @@ class FileExplorer extends Component {
 							<ToolbarTitle text='breadbrumb' />
 						</ToolbarGroup>
 					</Toolbar>
+					<Sidebar />
 					<ContentView />
 				</div>
 			</MuiThemeProvider>
