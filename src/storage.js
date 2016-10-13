@@ -1,3 +1,9 @@
+const rootFolder = {
+	name: '~',
+	type: 'folder',
+	contents: []
+};
+
 class StorageManager {
 	constructor(storage) {
 		this.storage = storage;
@@ -5,7 +11,10 @@ class StorageManager {
 
 	getItem(id) {
 		const item = this.storage.getItem(id);
-		return { id, ...JSON.parse(item) };
+		if (item) {
+			return { id, ...JSON.parse(item) };
+		}
+		return null;
 	}
 
 	getFullTree() {
@@ -16,7 +25,19 @@ class StorageManager {
 	}
 
 	updateTree() {
-		this.tree = this.getSubTree('root~', this.getItem('root~'));
+		const rootItem = this.getItem('root~');
+		let tree;
+		if (!rootItem) {
+			tree = this.initRoot();
+		} else {
+			tree = this.getSubTree('root~', this.getItem('root~'));
+		}
+		this.tree = tree;
+	}
+
+	initRoot() {
+		this.storage.setItem('root~', JSON.stringify(rootFolder));
+		return { ...rootFolder, children: [], id: 'root~' };
 	}
 
 	getSubTree(id, node) {
