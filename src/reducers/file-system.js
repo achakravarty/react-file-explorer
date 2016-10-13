@@ -17,6 +17,21 @@ export default function fileSystem(state = {}, action) {
 			contents
 		};
 	}
+	case constants.NEW_ITEM_CREATED:
+	case constants.ITEM_PASTED:	{
+		const { contents, structure } = action;
+		return {
+			...state,
+			contents,
+			structure
+		};
+	}
+	case constants.ITEM_EDITING: {
+		return {
+			...state,
+			contents: action.contents
+		};
+	}
 	default: return state;
 	}
 }

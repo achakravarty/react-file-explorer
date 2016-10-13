@@ -46,6 +46,55 @@ class StorageManager {
 		});
 		return result;
 	}
+
+	createItem(contents) {
+		const id = btoa(Date.now());
+		this.storage.setItem(id, JSON.stringify(contents));
+		return id;
+	}
+
+	updateItem(id, newContents) {
+		const item = this.getItem(id);
+		const updatedItem = Object.assign(item, newContents);
+		this.storage.setItem(id, JSON.stringify(updatedItem));
+	}
+
+	copyToClipboard(...args) {
+		this.clipboard = { ...args[0] };
+	}
+
+	paste(currentFolderId) {
+		if (this.clipboard) {
+			const clipboard = this.clipboard;
+			if (clipboard.operation === 'copy') {
+				const { id } = clipboard;
+				this.duplicateItems(currentFolderId, id);
+			} else if (clipboard.operation === 'cut') {
+				const { id, currentFolderId: oldFolder } = clipboard;
+				this.moveItems(id, oldFolder, currentFolderId);
+			}
+		}
+	}
+
+	duplicateItems(currentFolderId, id) {
+		const item = this.getItem(id);
+		if (item.type === 'folder') {
+			item.contents.forEach(child => this.pasteItems(item.id, child));
+		}
+		const newItemId = this.createItem(item);
+		this.updateItem(currentFolderId, { contents: [newItemId] });
+	}
+
+	moveItems(id, oldFolder, newFolder) {
+		const newFolderContents = this.getItem(newFolder);
+		const mergedContents = newFolderContents.contents.concat([id]);
+		this.updateItem(newFolder, { ...newFolderContents, contents: mergedContents });
+
+		const oldFolderContents = this.getItem(oldFolder);
+		const indexToRemove = oldFolderContents.contents.indexOf(id);
+		oldFolderContents.contents.splice(indexToRemove, 1);
+		this.updateItem(oldFolder, { ...oldFolderContents });
+	}
 }
 
 const storageManager = new StorageManager(localStorage);

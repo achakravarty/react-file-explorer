@@ -5,6 +5,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import fileSystem from './reducers/file-system';
+import contextMenu from './reducers/context-menu';
 import FileSystemManager from './file-system';
 import Explorer from './containers/explorer';
 
@@ -12,7 +13,8 @@ injectTapEventPlugin();
 const folderStructure = FileSystemManager.getFolderStructure();
 
 const rootReducer = combineReducers({
-	fileSystem
+	fileSystem,
+	contextMenu
 });
 
 const store = createStore(rootReducer,
