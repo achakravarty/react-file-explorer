@@ -1,0 +1,41 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es6": true,
+        "node": true,
+        "mocha": true
+    },
+    "extends": "airbnb",
+    "plugins": [
+        "react"
+    ],
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "sourceType": "module"
+    },
+    "rules": {
+        "no-const-assign": "warn",
+        "no-this-before-super": "warn",
+        "no-undef": "warn",
+        "no-unreachable": "warn",
+        "no-unused-vars": "warn",
+        "constructor-super": "warn",
+        "valid-typeof": "warn",
+        "indent": ["error", "tab"],
+        "no-mixed-spaces-and-tabs": "error",
+        "no-tabs": "off",
+        "space-in-parens": "error",
+        "jsx-quotes": ["error", "prefer-single"],
+        "comma-dangle": ["error", "only-multiline"],
+        "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
+        "react/jsx-indent": ["error", "tab"],
+        "react/prefer-stateless-function": "warn",
+        "react/jsx-curly-spacing": ["error", "always"],
+        "react/forbid-prop-types": ["error", { "forbid": ["any"] }],
+        "react/jsx-indent-props": ["error", "tab"],
+        "react/jsx-closing-bracket-location": ["error", { "nonEmpty": "after-props", "selfClosing": "tag-aligned" }]
+    }
+}
