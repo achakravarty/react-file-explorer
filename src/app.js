@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import fileSystem from './reducers/file-system';
 import contextMenu from './reducers/context-menu';
+import dialog from './reducers/dialog';
 import FileSystemManager from './file-system';
 import Explorer from './containers/explorer';
 
@@ -14,7 +15,8 @@ const folderStructure = FileSystemManager.getFolderStructure();
 
 const rootReducer = combineReducers({
 	fileSystem,
-	contextMenu
+	contextMenu,
+	dialog
 });
 
 const store = createStore(rootReducer,

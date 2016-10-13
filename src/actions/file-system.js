@@ -109,6 +109,42 @@ const doneEditing = (itemId, currentFolderId, newName) => {
 	return itemCreated(folderStructure, contents);
 };
 
+const filesUploaded = (dispatch, fileType, result, name, currentFolderId) => {
+	const newFileIds = [];
+	let preview;
+	if (fileType === 'image') {
+		preview = result;
+	}
+	newFileIds.push(FileSystemManager.uploadFile(
+		{ name, type: fileType, preview, contents: result }));
+	dispatch(update(newFileIds, currentFolderId));
+};
+
+const uploadFiles = (files, currentFolderId) => {
+	const imageType = /^image\//;
+	const textType = /^text\//;
+
+	return (dispatch) => {
+		const fileReader = new FileReader();
+
+		files.forEach((file) => {
+			const { name, type } = file;
+			let fileType;
+
+			fileReader.onload = (e) => {
+				filesUploaded(dispatch, fileType, e.target.result, name, currentFolderId);
+			};
+
+			if (imageType.test(type)) {
+				fileType = 'image';
+				fileReader.readAsDataURL(file);
+			} else if (textType.test(type)) {
+				fileType = 'text';
+				fileReader.readAsText(file);
+			}
+		});
+	};
+};
 
 export const constants = {
 	CONTENTS_FETCHED,
@@ -129,5 +165,6 @@ export const actions = {
 	cut,
 	paste,
 	startEditing,
-	doneEditing
+	doneEditing,
+	uploadFiles
 };

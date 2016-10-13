@@ -91,6 +91,10 @@ class FileSystemManager {
 	static getCurrentPath(id) {
 		return storageManager.getCurrentPath(id);
 	}
+
+	static uploadFile(file) {
+		return storageManager.createItem({ ...file });
+	}
 }
 
 export default FileSystemManager;
