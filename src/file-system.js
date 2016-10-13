@@ -95,6 +95,10 @@ class FileSystemManager {
 	static uploadFile(file) {
 		return storageManager.createItem({ ...file });
 	}
+
+	static openFile(id) {
+		return storageManager.getItem(id);
+	}
 }
 
 export default FileSystemManager;

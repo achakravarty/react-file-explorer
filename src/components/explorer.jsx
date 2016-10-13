@@ -8,6 +8,7 @@ import Sidebar from '../containers/sidebar';
 import ContentView from '../containers/content-view';
 import Breadcrumb from '../containers/breadcrumb';
 import FileUploader from '../containers/file-uploader';
+import FilePreview from '../containers/file-preview';
 
 class FileExplorer extends Component {
 	componentWillMount() {
@@ -34,6 +35,7 @@ class FileExplorer extends Component {
 					<Sidebar />
 					<ContentView />
 					<FileUploader currentFolder={ this.props.currentFolder } />
+					<FilePreview />
 				</div>
 			</MuiThemeProvider>
 		);
