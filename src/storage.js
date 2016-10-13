@@ -95,6 +95,23 @@ class StorageManager {
 		oldFolderContents.contents.splice(indexToRemove, 1);
 		this.updateItem(oldFolder, { ...oldFolderContents });
 	}
+
+	getCurrentPath(id, node, path) {
+		const current = node || this.tree;
+		const result = path || '';
+		if (current.id === id) {
+			return `${result} / ${current.name}`;
+		}
+		if (current.type === 'folder') {
+			for (const child of current.children) {
+				const currentPath = this.getCurrentPath(id, child, current.name);
+				if (currentPath) {
+					return `${result} / ${currentPath}`;
+				}
+			}
+		}
+		return null;
+	}
 }
 
 const storageManager = new StorageManager(localStorage);

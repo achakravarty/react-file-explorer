@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
-import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
+import { Toolbar, ToolbarGroup } from 'material-ui/Toolbar';
 
 import Sidebar from '../containers/sidebar';
 import ContentView from '../containers/content-view';
+import Breadcrumb from '../containers/breadcrumb';
 
 class FileExplorer extends Component {
 	componentWillMount() {
@@ -22,7 +23,9 @@ class FileExplorer extends Component {
 					<AppBar title='React File Explorer' />
 					<Toolbar>
 						<ToolbarGroup>
-							<ToolbarTitle text='breadbrumb' />
+							<Breadcrumb />
+						</ToolbarGroup>
+						<ToolbarGroup>
 						</ToolbarGroup>
 					</Toolbar>
 					<Sidebar />

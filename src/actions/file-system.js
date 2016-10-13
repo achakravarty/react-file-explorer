@@ -8,15 +8,17 @@ const ITEM_CUT = 'ITEM_CUT';
 const ITEM_PASTED = 'ITEM_PASTED';
 const ITEM_EDITING = 'ITEM_EDITING';
 
-const contentsFetched = (contents) => ({
+const contentsFetched = (contents, path) => ({
 	type: CONTENTS_FETCHED,
-	contents
+	contents,
+	path
 });
 
-const folderChanged = (folderId, contents) => ({
+const folderChanged = (folderId, contents, path) => ({
 	type: FOLDER_CHANGED,
 	folderId,
-	contents
+	contents,
+	path
 });
 
 const itemCreated = (structure, contents) => ({
@@ -46,12 +48,14 @@ const startedEditing = contents => ({
 
 const getDetails = (id) => {
 	const contents = FileSystemManager.getContents(id);
-	return contentsFetched(contents);
+	const path = FileSystemManager.getCurrentPath(id);
+	return contentsFetched(contents, path);
 };
 
 const changeFolder = (id) => {
 	const contents = FileSystemManager.getContents(id);
-	return folderChanged(id, contents);
+	const path = FileSystemManager.getCurrentPath(id);
+	return folderChanged(id, contents, path);
 };
 
 const update = (itemIds, currentFolderId) => {

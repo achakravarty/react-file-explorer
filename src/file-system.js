@@ -87,6 +87,10 @@ class FileSystemManager {
 		storageManager.paste(currentFolderId);
 		storageManager.updateTree();
 	}
+
+	static getCurrentPath(id) {
+		return storageManager.getCurrentPath(id);
+	}
 }
 
 export default FileSystemManager;
