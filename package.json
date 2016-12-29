@@ -6,10 +6,9 @@
   "scripts": {
     "test": "mocha --compilers js:babel-core/register",
     "build": "webpack -w",
-    "lint": "eslint src/ test/",
+    "lint": "eslint --ext .js,.jsx src/ test/",
     "start": "webpack-dev-server --content-base ./public"
   },
-
   "repository": {
     "type": "git",
     "url": "git+https://github.com/achakravarty/react-file-explorer.git"
